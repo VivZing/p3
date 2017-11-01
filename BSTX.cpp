@@ -355,7 +355,11 @@ int BinarySearchTreeX<Comparable>::sum() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::sum(BinaryNodeX<Comparable> *t) const
 {
-  return 0; // to be written by student
+  if(t == NULL)
+    return 0;
+  else
+    return t->element + sum(t->left) + sum(t->right);
+  // to be written by student
 }
 
 template <class Comparable>
