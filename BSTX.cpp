@@ -367,7 +367,9 @@ bool BinarySearchTreeX<Comparable>::isAncestor(const Comparable & x,
   const Comparable & possibleAncestor) const
 
 {
-  return true;  // to be written by student
+  if(x < possibleAncestor)
+    return true;
+  return false;;  // to be written by student
 }
 
 
