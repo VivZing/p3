@@ -313,6 +313,35 @@ int BinarySearchTreeX<Comparable>::height() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::height(BinaryNodeX<Comparable> *t) const
 {
+  //counters for left and right subtrees of root
+  int left_h = 0;
+  int right_h = 0;
+  BinaryNodeX<Comparable>* temp = t;
+  //if tree is empty
+  if(t == NULL)
+  {
+    return 0;
+  }
+  
+  temp = t->left;
+  while(temp != NULL)
+  {
+    left_h++;
+    temp = temp->left;
+  }
+  
+  temp = t->right;
+  while(temp != NULL)
+  {
+    right_h++;
+    temp = temp->right;
+  }
+  
+  if(left_h > right_h)
+    return left_h;
+  else
+    return right_h;
+  
   return 0;  // to be written by student
 }
 
