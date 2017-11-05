@@ -358,9 +358,15 @@ bool BinarySearchTreeX<Comparable>::isAncestor(const Comparable & x,
   const Comparable & possibleAncestor) const
 
 {
-  if(x < possibleAncestor)
+  //call the find function
+  BinaryNodeX<Comparable>* t = find (possibleAncestor, root);
+  
+  if (x == elementAt(find(x, t)))
     return true;
-  return false;;  // to be written by student
+  else
+    return false;
+  
+  return true;  // to be written by student
 }
 
 
