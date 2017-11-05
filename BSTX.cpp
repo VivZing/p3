@@ -313,34 +313,25 @@ int BinarySearchTreeX<Comparable>::height() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::height(BinaryNodeX<Comparable> *t) const
 {
-  //counters for left and right subtrees of root
-  int left_h = 0;
-  int right_h = 0;
-  BinaryNodeX<Comparable>* temp = t;
-  //if tree is empty
-  if(t == NULL)
+  int left_height = 0, right_height = 0;
+  
+  if (t->left == NULL && t->right == NULL)  //leafNode
   {
     return 0;
   }
-  
-  temp = t->left;
-  while(temp != NULL)
+  else  //not a leafNode
   {
-    left_h++;
-    temp = temp->left;
+    if (t->left)
+      left_height = 1 + height(t->left);
+    
+    if (t-> right)
+      right_height = 1 + height(t->right);
+    
+    if (left_height > right_height)
+      return left_height;
+    else  //right_height < left_height
+      return right_height;
   }
-  
-  temp = t->right;
-  while(temp != NULL)
-  {
-    right_h++;
-    temp = temp->right;
-  }
-  
-  if(left_h > right_h)
-    return left_h;
-  else
-    return right_h;
   
   return 0;  // to be written by student
 }
@@ -383,6 +374,8 @@ int BinarySearchTreeX<Comparable>::highestFull() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::highestFull(BinaryNodeX<Comparable> *t) const
 {
+  return (height(t) - deepestFull(t));
+  
   return 0;  // to be written by student
 }
 
@@ -395,6 +388,37 @@ int BinarySearchTreeX<Comparable>::deepestFull() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::deepestFull(BinaryNodeX<Comparable> *t) const
 {
+  //cout << "t = " << t->element << endl;
+  
+  if (t->left == NULL && t->right == NULL) //leafNode
+  {
+    //cout << "leafNode\n";
+    return -1;
+  }
+
+  if (t->left == NULL)  //no left, so look right
+  {
+    //cout << "no left\n";
+    return (1 + deepestFull(t->right));
+  }
+    
+  if (t->right == NULL)  //no right, so look left
+  {
+    //cout << "no right\n";
+    return (1 + deepestFull(t->left));
+  }
+  
+  if (deepestFull(t->left) < deepestFull(t->right))
+  {
+    //cout << "left is min\n";
+    return (deepestFull(t->left) + 1);
+  }
+  else
+  {
+    //cout << "right is min\n";
+    return (deepestFull(t->right) + 1);
+  }
+    
   return 0;  // to be written by student
 }
 
